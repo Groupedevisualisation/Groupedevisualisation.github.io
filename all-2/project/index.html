@@ -1,12 +1,13 @@
 <html>
     <head>
+        <meta charset="utf-8"> 
         <script src="https://d3js.org/d3.v7.min.js"></script>
         <script src="js/radarChart.js"></script>
         <script src="js/DivergingBarChart.js"></script>
         <link rel="stylesheet" type="text/css" href="css/boxchart.css">
         <link rel="stylesheet" type="text/css" href="css/homepage_use.css"/>
     </head>
-    <body background="cool-background2.png">
+    <body background="cool-background2.png" style="margin: 0px;">
         <div id="container">
 			<header class="top">
 				<div class="top_name">
@@ -35,7 +36,7 @@
         
         <!--年度发文折线图-->
         <h2 style="text-align:center;margin-top: 100px;">YTT 科学家的生产力曲线(发文数量)</h2>
-        <div class="container" style="display: flex;">
+        <div class="container" style="display: flex; margin-left: 20px;">
             <div id="linechart" ></div>
             <div id="linechart-explain" style="text-align:left;margin-left: 6%;margin-top: 20px;max-width: 20%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下的折线图展示了不同领域的“青年千人计划”科学家的生产力（即发文量）曲线，X轴表示该科学家回国前/后的年数，Y轴表示每一个学科类别下科学家相对于归国那一年的平均发文量增长率，基准年份也可通过交互自定义。
             </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在大部分领域中，归国的“青年千人计划”科学家的生产力都<span style="color: crimson;"><b>随年份增长不断提高</b></span>，但<b>Physics and mathematics</b>领域科学家的生产力增长水平较其他领域更低。
@@ -45,8 +46,8 @@
 
         <!--箱型图-->
         <!--选项卡--> 
-        <h2 style="text-align:center;margin-top: 100px;">YTT 科学家及其海外同行发文量对比</h2>
-        <div class="select-wrapper" style="margin: 5px 0px 10px 10px;">
+        <h2 style="text-align:center;margin-top: 100px;">YTT科学家及其海外同行生产力增长差异</h2>
+        <div class="select-wrapper" style="text-align:center;margin-left: 20px;">
             <label for="dropdownSelect1">选择作者类型：</label>
             <select id="dropdownSelect1" onchange="showSelectedOption1()">
               <option value="ALL" selected>不限</option>
@@ -64,7 +65,7 @@
             </select>
         </div>
         <!--boxchart--> 
-        <div id="boxchart_div" style="margin: 0px 0px 10px 150px;"></div>
+        <div id="boxchart_div" style="text-align:center;"></div>
         <div id="boxchart-explain" style="text-align:left;margin-left: 6%;margin-top: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是，这种生产力的增长是由于<b>科学家自身学术水平的提高</b>，还是“青年千人计划”为科学家<b>提供了更优质的学术平台和学术资源</b>？
         </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了进一步探讨这个问题，我们采用了如下方法进行讨论。我们获取了原论文中对科学家的配对，并将科学家与其配对科学家的生产力上升水平相减，来观察两者生产力水平增长的差异。
         </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配对方法为，将每个海归与可比的“留校者”相匹配，即在中国上大学并在同一所海外大学获得同一领域博士学位，与海归在同一时期但留在海外学术界的科学家。为了确保YTT和stayer的可比性，原作者进一步收集了有关其出版物和引文的数据，并使用<b>粗略精确匹配（CEM）</b>来识别匹配的配对。
@@ -76,16 +77,16 @@
         <!--条形图-->
         <h2 style="text-align:center;margin-top: 100px;">YTT 科学家及其海外同行的团队规模和研究资助轨迹比较</h2>
         <div id="grant-teamsize">
-            <div id="gt-select" style="border-radius: 5%; font-size: 16px;border-color: lightslategray;border-width: 2px;margin-left:3%;">
-                <span>Selector:</span><select id="selectButton" style="margin-left:10px;font-size: 16px;"></select>
+            <div id="gt-select" style="border-radius: 5%; font-size: 16px;border-color: lightslategray;border-width: 2px;margin-left:5%;">
+                <span>Selector:</span><select id="selectButton" style="margin-left:10px;font-size: 14px;"></select>
             </div>
-            <div id="grant-teamsize-charts" style="margin: 30px 0px 0px 80px;">
+            <div id="grant-teamsize-charts" style="display: flex;/* margin: 30px 0px 0px 80px;*/">
                 <div id="teamsizechart" style="display: inline-block;"></div>
                 <div id="grantchart" style="display: inline-block;"></div>
             </div>
             <p id="grant-teamsize-explain" style="text-align:left;margin-left: 6%;margin-right: 6%;font-size: 16px;">
                 &emsp;&emsp;图表比较了YTT科学家及其海外同行的在回国前后5年的<strong>团队规模（见左图）和研究经费（见右图）</strong>，结果显示回国后YTT科学家获得了比海外同行更多的研究资金和人力支持。<br>
-                &emsp;&emsp;总体来看，YTT 科学家可能<span style="color: crimson;"><b>“受益于该项目慷慨的启动资金和中国充足的 STEM 学生供应”</b></span>。
+                总体来看，YTT 科学家可能<span style="color: crimson;"><b>“受益于该项目慷慨的启动资金和中国充足的 STEM 学生供应”</b></span>。
             </p>
         </div>
         <script type="text/javascript" src="js/grantsizeDraw.js"></script>
@@ -98,7 +99,7 @@
             &emsp;&emsp;但不可否认，中国千人计划存在高尖端人才引进面临的难题与挑战，需要进行进一步的分析与思考。
             </p>
          <!--跳转-->
-        <a href="index.html" style="margin: 10px 100px 20px 0px;float: right;">
+        <a href="../../index.html" style="margin: 10px 100px 20px 0px;float: right;">
         <button>返回首页！</button>
     </a>
     </body>
