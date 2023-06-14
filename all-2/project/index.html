@@ -1,0 +1,105 @@
+<html>
+    <head>
+        <script src="https://d3js.org/d3.v7.min.js"></script>
+        <script src="js/radarChart.js"></script>
+        <script src="js/DivergingBarChart.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/boxchart.css">
+        <link rel="stylesheet" type="text/css" href="css/homepage_use.css"/>
+    </head>
+    <body background="cool-background2.png">
+        <div id="container">
+			<header class="top">
+				<div class="top_name">
+                    <div class="top_left">千人计划取得成功了吗？</div>
+				    <div class="top_bottom">小组成员：卢欣雨 刘映彤 冯冉 赵思琪</div>
+                </div>
+                <div class="top_right"><img src="pic.png" style = "width:190px;height: 190px;" ></div>
+			</header>
+        </div>
+
+        <h1 style="margin:50px 0px 0px 50px;">深层探究</h1>
+
+         <!--YTT offer接受者和拒绝者比较-->
+        <h2 style="text-align:center;">YTT offer接受者和拒绝者比较</h2>
+        <div id="acceptors-rejectors">
+            <div id="radarchart" style="margin-left:15%;"></div>
+            <p id="radar" style="text-align:left;margin-left: 6%;margin-right: 6%;font-size: 16px;">
+                &emsp;&emsp;这张图表比较了<em><b>339</b></em>位回国的 YTT offer接受者和<em><b>73</b></em>位留在海外的 YTT offer拒绝者。<br>
+                &emsp;&emsp;一方面，中国的 YTT 项目<strong>吸引了高素质的研究人员</strong>，其中超过一半的人获得了全球 100 强 STEM 项目的博士学位，超过三分之一的人获得了海外教职。
+                他们的生产力水平也不低，平均每年能发表篇论文，其中的<em>24%</em>都发表在 top10% 的期刊上；另一方面，该计划<strong>在招募一流科学家方面不太成功</strong>。拒绝者的生产力水平更高（每年<em>2.93</em>篇对<em>2.39</em>篇论文），能获得更多的研究资助（<em>30,365</em>美元对<em>4439</em>美元），
+                更有可能（<em>89%</em>对<em>14%</em>）有海外教职任命.<br>
+                &emsp;&emsp;总体来看，这些YTT offer接受者是<span style="color: crimson;"><b>"高素质但不是一流的人才”</b></span>。换句话说，中国的 YTT 计划对有能力但没有资金来经营自己的实验室进行独立研究的外籍人士很有吸引力。
+            </p>
+        </div>
+        <script type="text/javascript" src="js/radarDraw.js"></script>
+        
+        <!--年度发文折线图-->
+        <h2 style="text-align:center;margin-top: 100px;">YTT 科学家的生产力曲线(发文数量)</h2>
+        <div class="container" style="display: flex;">
+            <div id="linechart" ></div>
+            <div id="linechart-explain" style="text-align:left;margin-left: 6%;margin-top: 20px;max-width: 20%;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如下的折线图展示了不同领域的“青年千人计划”科学家的生产力（即发文量）曲线，X轴表示该科学家回国前/后的年数，Y轴表示每一个学科类别下科学家相对于归国那一年的平均发文量增长率，基准年份也可通过交互自定义。
+            </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在大部分领域中，归国的“青年千人计划”科学家的生产力都<span style="color: crimson;"><b>随年份增长不断提高</b></span>，但<b>Physics and mathematics</b>领域科学家的生产力增长水平较其他领域更低。
+            </div>
+        </div>
+        <script src="js/linechart.js"></script>
+
+        <!--箱型图-->
+        <!--选项卡--> 
+        <h2 style="text-align:center;margin-top: 100px;">YTT 科学家及其海外同行发文量对比</h2>
+        <div class="select-wrapper" style="margin: 5px 0px 10px 10px;">
+            <label for="dropdownSelect1">选择作者类型：</label>
+            <select id="dropdownSelect1" onchange="showSelectedOption1()">
+              <option value="ALL" selected>不限</option>
+              <option value="FA">第一作者</option>
+              <option value="LA">通讯作者</option>
+            </select>
+        </div>
+        <div class="select-wrapper">
+            <label for="dropdownSelect2">选择期刊类型：</label>
+            <select id="dropdownSelect2" onchange="showSelectedOption2()">
+              <option value="all" selected>不限</option>
+              <option value="Q12">Top 50% 期刊</option>
+              <option value="Q1">Top 25% 期刊</option>
+              <option value="top10">Top 10% 期刊</option>
+            </select>
+        </div>
+        <!--boxchart--> 
+        <div id="boxchart_div" style="margin: 0px 0px 10px 150px;"></div>
+        <div id="boxchart-explain" style="text-align:left;margin-left: 6%;margin-top: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是，这种生产力的增长是由于<b>科学家自身学术水平的提高</b>，还是“青年千人计划”为科学家<b>提供了更优质的学术平台和学术资源</b>？
+        </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了进一步探讨这个问题，我们采用了如下方法进行讨论。我们获取了原论文中对科学家的配对，并将科学家与其配对科学家的生产力上升水平相减，来观察两者生产力水平增长的差异。
+        </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;配对方法为，将每个海归与可比的“留校者”相匹配，即在中国上大学并在同一所海外大学获得同一领域博士学位，与海归在同一时期但留在海外学术界的科学家。为了确保YTT和stayer的可比性，原作者进一步收集了有关其出版物和引文的数据，并使用<b>粗略精确匹配（CEM）</b>来识别匹配的配对。
+        </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们以箱型图来表现这种差异的大小，并且可以对作者类型（不限、第一作者、通讯作者）以及期刊类型进行限制。总体来说，归国科学家的生产力增长水平在归国三年后<span style="color: crimson;"><b>逐渐高于</b></span>配对科学家，在通讯作者出版物上亦然。然而，归国科学家与配对科学家在第一作者出版物上的生产力增长水平并无显著差别。
+        </br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由于STEM领域的规范是将主要研究者列为出版物的最后和通讯作者，这些结果表明，与海外同行相比，YTT海归更有可能成为<span style="color: crimson;"><b>独立研究人员</b></span>，在回归后时期追求自己的科学议程。相比之下，留下来的人更有可能在其他人的研究小组中工作。
+        </div>
+        <script src="js/boxchart.js"></script>  
+        
+        <!--条形图-->
+        <h2 style="text-align:center;margin-top: 100px;">YTT 科学家及其海外同行的团队规模和研究资助轨迹比较</h2>
+        <div id="grant-teamsize">
+            <div id="gt-select" style="border-radius: 5%; font-size: 16px;border-color: lightslategray;border-width: 2px;margin-left:3%;">
+                <span>Selector:</span><select id="selectButton" style="margin-left:10px;font-size: 16px;"></select>
+            </div>
+            <div id="grant-teamsize-charts" style="margin: 30px 0px 0px 80px;">
+                <div id="teamsizechart" style="display: inline-block;"></div>
+                <div id="grantchart" style="display: inline-block;"></div>
+            </div>
+            <p id="grant-teamsize-explain" style="text-align:left;margin-left: 6%;margin-right: 6%;font-size: 16px;">
+                &emsp;&emsp;图表比较了YTT科学家及其海外同行的在回国前后5年的<strong>团队规模（见左图）和研究经费（见右图）</strong>，结果显示回国后YTT科学家获得了比海外同行更多的研究资金和人力支持。<br>
+                &emsp;&emsp;总体来看，YTT 科学家可能<span style="color: crimson;"><b>“受益于该项目慷慨的启动资金和中国充足的 STEM 学生供应”</b></span>。
+            </p>
+        </div>
+        <script type="text/javascript" src="js/grantsizeDraw.js"></script>
+
+        <h1 style="margin:50px 0px 0px 50px;">结论</h1>
+        <p id="radar" style="text-align:left;margin-left: 6%;margin-right: 6%;font-size: 18px;margin-bottom: 50px;">
+            &emsp;&emsp;从整体上看，中国千人计划<span style="color: crimson;"><b>取得了一定的成功</b></span>。<br>
+            &emsp;&emsp;首先，从国家层面上看，千人计划归来的科学家都是一流科学家，他们为中国科研注入了<span style="color: crimson;"><b>新的生机与活力</b></span>，并取得了一定的科研成果。<br>
+            &emsp;&emsp;其次，从科学家本身来看，科学家归国后有了<span style="color: crimson;"><b>更多的科研基金和团队支持</b></span>，他们本身相比于留在海外的科学家也有了更多的提升。<br>
+            &emsp;&emsp;但不可否认，中国千人计划存在高尖端人才引进面临的难题与挑战，需要进行进一步的分析与思考。
+            </p>
+         <!--跳转-->
+        <a href="index.html" style="margin: 10px 100px 20px 0px;float: right;">
+        <button>返回首页！</button>
+    </a>
+    </body>
+</html>
